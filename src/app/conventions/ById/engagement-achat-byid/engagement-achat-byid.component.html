@@ -1,0 +1,86 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0">Demande Bon d'Achat</h4>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="float-end">
+                    <!-- Optional content to display at the top of the card -->
+                </div>
+                <div>
+                    <form (ngSubmit)="addEngagementAchat()">
+                        <div class="row mb-3 mt-4">
+                            <label class="col-sm-4 col-form-label">Nom Article</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" type="text" placeholder="nom de l'article"
+                                    name="description" [(ngModel)]="article">
+                            </div>
+                        </div>
+                        <!-- Dropdown list for Voix -->
+                        <div class="row mb-3">
+                            <label class="col-sm-4 col-form-label">Nombre de Mois</label>
+                            <div class="col-sm-6">
+                                <select class="form-select" name="nbrmois" [(ngModel)]="nbrmois"
+                                    (change)="calculateDeduction()">
+                                    <option></option>
+                                    <option value="4">4 Mois</option>
+                                    <option value="6">6 Mois</option>
+                                    <option value="9">9 Mois</option>
+                                    <option value="12">12 Mois</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-4 col-form-label">Prix Article</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" type="number" placeholder="Prix de l'article"
+                                    name="prix_article" [(ngModel)]="prix_article" (input)="calculateDeduction()">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-4 col-form-label">Avance</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" type="number" placeholder="Prix de l'article" name="avance"
+                                    [(ngModel)]="avance" (input)="calculateDeduction()">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-4 col-form-label">Prix Finale</label>
+                            <div class="col-sm-6">
+                                <span>{{ prix_finale }}</span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-4 col-form-label">Deduction Mensuelle</label>
+                            <div class="col-sm-6">
+                                <span>{{ deduction_mensuelle | number: '1.2-2' }}</span>
+                            </div>
+                        </div>
+                        <!-- End of calculation results -->
+                        <div class="form-group mb-3 text-center justify-content-center row mt-3 pt-1">
+                            <div class="col-12">
+                                <button class="btn btn-info w-25 waves-light btn-rounded" type="submit">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div><!-- end card -->
+    </div><!-- end col -->
+
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-body text-center">
+                <div>
+                    <img [src]="annonceById.image_url" alt="" class="styled-image">
+                </div>
+            </div>
+        </div><!-- end card -->
+    </div>
+
+</div>

@@ -1,0 +1,10 @@
+.custom-modal {
+    max-width: 50%; /* Set the maximum width to the viewport width */
+    overflow-x: hidden; /* Hide horizontal overflow if present */
+    text-align: center;
+}
+
+.custom-modal img {
+    max-width: 60%; /* Ensure the image width doesn't exceed the modal width */
+    height: auto; /* Maintain the image's aspect ratio */
+}

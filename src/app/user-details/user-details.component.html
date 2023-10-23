@@ -1,0 +1,185 @@
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card m-b-30">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <img class="d-flex me-3 rounded-circle img-thumbnail avatar-lg" [src]="user?.image"
+                        alt="Generic placeholder image">
+                    <div class="row">
+                        <div class="col-9">
+                            <div class="flex-grow-1">
+                                <h5 class="mt-0 font-size-18 mb-1">{{user?.name}}</h5>
+                                <p class="text-muted font-size-14">{{user?.matricule}}</p>
+                                <p class="text-muted font-size-14">{{user?.etat_adhesion}}</p>
+                                <ul class="social-links list-inline mb-0">
+                                    <li class="list-inline-item">
+                                        <a role="button" class="text-reset" href="tel:{{ user?.gsm }}">
+                                            <i class="fas fa-phone-alt"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="d-flex justify-content-end align-items-center">
+                                <!-- Add the toggle icon here -->
+                                <span (click)="toggleUserEtatAdhesion(user)" class="">
+                                    <i class="fas toggle-icon"
+                                        [ngClass]="{'fa-toggle-on': user?.etat_adhesion === 'Actif', 'fa-toggle-off': user?.etat_adhesion === 'Inactif'}"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- First Row -->
+<div class="row">
+    <!-- Children Card -->
+    <div class="col-md-4 col-12">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title">Enfants</h5>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li *ngFor="let child of children">{{ child.nom }} ({{ child.date_naissance }})</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Parent and Conjoint Cards -->
+    <div class="col-md-4 col-12">
+        <!-- Parent Card -->
+        <div class="card mb-2">
+            <div class="card-header">
+                <h5 class="card-title">Parents</h5>
+            </div>
+            <div class="card-body">
+                <!-- Display parent data -->
+                <div *ngIf="parent">
+                    <p>{{ parent.nom_pere }} ({{ parent.date_naissance_pere }})</p>
+                    <p>{{ parent.nom_mere }} ({{ parent.date_naissance_mere }})</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-12">
+        <!-- Parent Card -->
+        <div class="card mb-2">
+            <div class="card-header">
+                <h5 class="card-title">Conjoint</h5>
+            </div>
+            <div class="card-body">
+                <!-- Display conjoint data -->
+                <div *ngIf="conjoint">
+                    <p>{{ conjoint.nom }} ({{ conjoint.date_naissance }})</p>
+                    <p>{{ conjoint.fonction }}</p>
+                    <p>{{ adherent_lAmical}}</p>
+                    <button (click)="fetchMatchingUserDetails()">Fetch Matching User Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Second Row -->
+<div class="row">
+    <!-- Activite Reservations Card -->
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title">Activite Reservations</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <!-- Display activite reservations data -->
+                    <div *ngIf="activiteReservations.length > 0">
+                        <h5>Activite Reservations:</h5>
+                        <ul>
+                            <li *ngFor="let reservation of activiteReservations">{{ reservation.type }} ({{
+                                reservation.titre }}) {{reservation.prix}} dinar
+                            </li>
+                        </ul>
+                    </div>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Convention Reservations Card -->
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title">Convention Reservations</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped">
+
+                    <!-- user-info.component.html -->
+                    <div>
+                        <h1>User Information</h1>
+                        <div *ngIf="userInfo">
+                            <!-- Display mobile_internets data -->
+                            <h2>Mobile Internets</h2>
+                            <ul>
+                                <li *ngFor="let mobile of userInfo.mobile_internets">
+                                    <p><strong>ID:</strong> {{ mobile.id }}</p>
+                                    <p><strong>Choix Forfait:</strong> {{ mobile.choixforfait }}</p>
+                                    <!-- Add more properties as needed -->
+                                </li>
+                            </ul>
+
+                            <!-- Display adsls data -->
+                            <h2>ADSLs</h2>
+                            <ul>
+                                <li *ngFor="let adsl of userInfo.adsls">
+                                    <p><strong>ID:</strong> {{ adsl.id }}</p>
+                                    <p><strong>Debit:</strong> {{ adsl.debit }}</p>
+                                    <!-- Add more properties as needed -->
+                                </li>
+                            </ul>
+
+                            <!-- Display bon_achats data -->
+                            <h2>Bon Achats</h2>
+                            <ul>
+                                <li *ngFor="let bon of userInfo.bon_achats">
+                                    <p><strong>ID:</strong> {{ bon.id }}</p>
+                                    <p><strong>Montant:</strong> {{ bon.montant }}</p>
+                                    <!-- Add more properties as needed -->
+                                </li>
+                            </ul>
+
+                            <!-- Display engagement_achats data -->
+                            <h2>Engagement Achats</h2>
+                            <ul>
+                                <li *ngFor="let engagement of userInfo.engagement_achats">
+                                    <p><strong>ID:</strong> {{ engagement.id }}</p>
+                                    <p><strong>Article:</strong> {{ engagement.article }}</p>
+                                    <!-- Add more properties as needed -->
+                                </li>
+                            </ul>
+
+                            <!-- Display sports data -->
+                            <h2>Sports</h2>
+                            <ul>
+                                <li *ngFor="let sport of userInfo.sports">
+                                    <p><strong>ID:</strong> {{ sport.id }}</p>
+                                    <p><strong>enfant id</strong> {{ sport.enfant_id }}</p>
+                                    <p><strong>Type Abonnement:</strong> {{ sport.type_abonnement }}</p>
+                                    <!-- Add more properties as needed -->
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="col-12">
+    <div class="card">
+        <div class="card-body">
+
+            <h4 class="card-title">Vos Parent</h4>
+            <form (ngSubmit)="saveparent()">
+                <div class="row mb-3 mt-4" >
+                    <label for="example-text-input" class="col-sm-2 col-form-label">Nom Pere</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text"[(ngModel)]="nom_pere"
+                        [ngModelOptions]="{standalone: true}" >
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="example-text-input" class="col-sm-2 col-form-label">Prenom Pere</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" [(ngModel)]="prenom_pere"
+                            [ngModelOptions]="{standalone: true}">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="example-date-input" class="col-sm-2 col-form-label">Naissance Pere</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="date"  [(ngModel)]="date_naissance_pere"
+                        [ngModelOptions]="{standalone: true}">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="example-email-input" class="col-sm-2 col-form-label">Nom Mere</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text"  [(ngModel)]="nom_mere"
+                        [ngModelOptions]="{standalone: true}">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="example-tel-input" class="col-sm-2 col-form-label">Prenom Mere</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" [(ngModel)]="prenom_mere"
+                        [ngModelOptions]="{standalone: true}">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="example-date-input" class="col-sm-2 col-form-label">Naissance mere</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="date" [(ngModel)]="date_naissance_mere"
+                        [ngModelOptions]="{standalone: true}">
+                    </div>
+                </div>
+               
+                <div class="form-group mb-3 text-center justify-content-center row mt-3 pt-1">
+                    <div class="col-6">
+                        <button class="btn btn-info w-25 waves-light  btn-rounded" [disabled]="hasData" type="submit">Save</button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- end row -->
+        </div>
+    </div>
+</div> <!-- end col -->

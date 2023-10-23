@@ -1,0 +1,34 @@
+.center-photo {
+    vertical-align: middle;
+    text-align: center;
+
+    /* Optional: Center-align the content horizontally */
+}
+
+tr.hover-effect:hover {
+    cursor: pointer;
+    /* Change the cursor to a pointer on hover */
+}
+
+
+@media (max-width: 800px) {
+
+    #datatable-buttons th:nth-child(1),
+    #datatable-buttons td:nth-child(1) {
+        display: none;
+    }
+
+    #datatable-buttons th:nth-child(7),
+    #datatable-buttons td:nth-child(7) {
+        display: none;
+    }
+
+    #datatable-buttons th:nth-child(5),
+    #datatable-buttons td:nth-child(5) {
+        display: none;
+    }
+
+    .userdetails :hover {
+        background-color: aqua;
+    }
+}

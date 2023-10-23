@@ -1,0 +1,86 @@
+<div class="row">
+
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Liste de votre enfants</h4>
+
+        <div class="table-responsive">
+          <table class="table mb-0">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nom</th>
+                <th>Date Naissance</th>
+                <th>Scolarite</th>
+                <th>Sexe</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let enfant of enfantsData let i =index"
+                [ngClass]="{'table-danger': enfant.sexe === 'fille', 'table-info': enfant.sexe !== 'fille'}">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ enfant.nom }}</td>
+                <td>{{ enfant.date_naissance }}</td>
+                <td>{{ enfant.scolarite }}</td>
+                <td>{{ enfant.sexe }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Vos enfants</h4>
+
+        <form (ngSubmit)="addEnfant()">
+
+          <div class="row mb-3 mt-4">
+            <label class="col-sm-5 col-form-label">Nom</label>
+            <div class="col-sm-7">
+              <input class="form-control" name="nom" [(ngModel)]="nom" type="text"
+                [ngModelOptions]="{standalone: true}">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-5 col-form-label">Scolarite</label>
+            <div class="col-sm-7">
+              <select class="form-select" [(ngModel)]="scolarite" type="text" [ngModelOptions]="{standalone: true}">
+                <option [value]="'enfance'">Petite enfance</option>
+                <option [value]="'primaire'">Primaire</option>
+                <option [value]="'secondaire'">Secondaire</option>
+                <option [value]="'superieur'">Superieur</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label class="col-sm-5 col-form-label">Naissance </label>
+            <div class="col-sm-7">
+              <input class="form-control" type="date" [(ngModel)]="date_naissance"
+                [ngModelOptions]="{standalone: true}">
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label class="col-sm-5 col-form-label">Sex</label>
+            <div class="col-sm-7">
+              <select class="form-select" [(ngModel)]="sexe" [ngModelOptions]="{standalone: true}">
+                <option [value]="'fille'">Fille</option>
+                <option [value]="'garçon'">Garçon</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group mb-3 text-center justify-content-center row mt-3 pt-1">
+            <div class="col-6">
+              <button class="btn btn-info waves-light  btn-rounded" type="submit">Save</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

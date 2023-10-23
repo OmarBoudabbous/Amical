@@ -1,0 +1,59 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0">Demande Bon d'Achat</h4>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="float-end">
+                    <!-- Optional content to display at the top of the card -->
+                </div>
+                <div>
+                    <div>
+                        <form (ngSubmit)="addBonAchat()">
+                            <div class="row mb-3">
+                                <label class="col-sm-4 col-form-label">Montant Global Autorisé</label>
+                                <div class="col-sm-8">
+                                    <select class="form-select" name="montant" [(ngModel)]="montant">
+                                        <option [value]="100">100 TD</option>
+                                        <option [value]="150">150 TD</option>
+                                        <option [value]="200">200 TD</option>
+                                        <option [value]="250">250 TD</option>
+                                        <option [value]="300">300 TD</option>
+                                        <option [value]="350">350 TD</option>
+                                        <option [value]="400">400 TD</option>
+                                        <option [value]="450">450 TD</option>
+                                        <option [value]="500">500 TD</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- End of form fields -->
+                            <div class="form-group mb-3 text-center justify-content-center row mt-3 pt-1">
+                                <div class="col-12">
+                                    <button class="btn btn-info w-25 waves-light btn-rounded" type="submit">Save</button>
+                                </div>
+                            </div>
+                        </form>
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div><!-- end card -->
+    </div><!-- end col -->
+
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-body text-center">
+                <div>
+                    <img [src]="annonceById.image_url" alt="" class="styled-image">
+                </div>
+            </div>
+        </div><!-- end card -->
+    </div>
+
+</div>

@@ -1,0 +1,175 @@
+<div class="row">
+    <div class="col-xl-8">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-4">Liste Annonces Mobile et Internet</h4>
+
+                <div class="table-responsive">
+                    <table class="table table-centered mb-0 align-middle table-hover table-nowrap">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Photo</th>
+                                <th>Type d'Annonce</th>
+                                <th>Titre</th>
+                                <th>Fournisseur</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let annonce of annonces">
+                                <td>
+                                    <img [src]="annonce.image_url" alt="{{ annonce.titre }}" width="50">
+                                </td>
+                                <td>
+                                    {{ annonce.type_annonce }}
+                                </td>
+                                <td>
+                                    {{ annonce.titre }}
+                                </td>
+                                <td>
+                                    {{ annonce.fornisseur_name }}
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary" id="conventionDataButton"
+                                        (click)="loadAnnonceDataById(annonce.id)" title="Modifier"><i
+                                            class="fas fa-pencil-alt"></i></button>
+                                    <button class="btn btn-sm btn-danger" (click)="deleteAnnonce(annonce.id)"><i
+                                            class="fas fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="text-center mt-3">
+                        <button class="btn btn-primary" [disabled]="currentPage === 1" (click)="previousPage()"><i
+                                class=" fas fa-angle-double-left"></i></button>
+                        <span class="mx-2">{{ currentPage }} / {{ lastPage }}</span>
+                        <button class="btn btn-primary" [disabled]="currentPage === lastPage" (click)="nextPage()"> <i
+                                class=" fas fa-angle-double-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="float-end">
+                </div>
+                <h4 class="card-title mb-4">Ajouter Une Annonce </h4>
+
+                <div>
+                    <form (ngSubmit)="addAnnonce()">
+                        <div class="row mb-3 mt-4">
+                            <label class="col-sm-6 col-form-label">Titre</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" type="text" placeholder="titre" name="description"
+                                    [(ngModel)]="titre" [ngModelOptions]="{standalone: true}">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label class="col-sm-6 col-form-label">Type d'Annonce</label>
+                            <div class="col-sm-6">
+                                <select class="form-select" [(ngModel)]="type_annonce" name="type_annonce">
+                                    <option value="mobileInternet">Mobile Internet</option>
+                                    <option value="adsl">Adsl</option>
+                                    <option value="bonAchat">Bon d'Achat</option>
+                                    <option value="engagementAchat">Engagement Achat</option>
+                                    <option value="HotelBangalo">Hotel & Bangalo</option>
+                                    <option value="sport">Sport</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label class="col-sm-6 col-form-label">Fournisseur</label>
+                            <div class="col-sm-6">
+                                <select class="form-select" [(ngModel)]="fournisseurs_id"
+                                    [ngModelOptions]="{standalone: true}">
+                                    <option *ngFor="let f of fournisseursData" [value]="f.id">{{ f.nom }}</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="row mb-3">
+                            <label class="col-sm-6 col-form-label">Image</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" type="file" (change)="imageUpload($event)" name="image">
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3 text-center justify-content-center row mt-3 pt-1">
+                            <div class="col-12">
+                                <button class="btn btn-info waves-light btn-rounded" type="submit">Enregistrer</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Modal Template -->
+<div class="modal fade" id="conventionDataModal" tabindex="-1" aria-labelledby="conventionDataModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="conventionDataModalLabel">Modifier Une Annonce</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="updateAnnonce()" class="form-horizontal mt-3">
+                    <div class="row mb-3 mt-4">
+                        <label class="col-sm-4 col-form-label">Titre</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="text" placeholder="description convention"
+                                name="description" [(ngModel)]="annonceById.titre"
+                                [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">Type d'Annonce</label>
+                        <div class="col-sm-8">
+                            <select class="form-select" [(ngModel)]="annonceById.type_annonce" name="type_annonce">
+                                <option value="mobileInternet">Mobile Internet</option>
+                                <option value="adsl">Adsl</option>
+                                <option value="bonAchat">Bon d'Achat</option>
+                                <option value="engagementAchat">Engagement Achat</option>
+                                <option value="HotelBangalo">Hotel & Bangalo</option>
+                                <option value="sport">Sport</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">Fournisseur</label>
+                        <div class="col-sm-8">
+                            <select class="form-select" [(ngModel)]="annonceById.fornisseurs_id" name="fournisseurs_id">
+                                <option *ngFor="let f of fournisseursData" [value]="f.id">{{ f.nom }}</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">Image</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="file" (change)="imageUpload($event)" name="image">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

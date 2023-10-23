@@ -1,0 +1,135 @@
+<div class="vertical-menu">
+
+    <div data-simplebar class="h-100">
+
+        <!-- User details -->
+        <div class="user-profile text-center mt-3">
+            <div class="">
+                <img [src]="image" alt="" class="avatar-md rounded-circle">
+            </div>
+            <div class="mt-3">
+                <h4 class="font-size-16 mb-1">{{name}}</h4>
+                <span> Member
+                    <i [class.text-sucess]="etat_adhesion === 'Actif'" [class.text-danger]="etat_adhesion !== 'Actif'"
+                        class="ri-record-circle-line align-middle font-size-14"
+                        [ngClass]="{'text-success': etat_adhesion === 'Actif'}">
+                    </i>
+                    {{ etat_adhesion }}
+                </span>
+            </div>
+        </div>
+
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+            <!-- Left Menu Start -->
+            <ul class="metismenu list-unstyled" id="side-menu">
+                <li class="menu-title">Menu</li>
+
+
+                <li *ngIf="role === 'admin'">
+                    <a [routerLink]="['/dashboard/admin/index']" routerLinkActive="active" class="waves-effect">
+                        <i class="ri-home-3-fill"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li *ngIf="role === 'admin'">
+                    <a [routerLink]="['/dashboard/admin/fournisseur']" routerLinkActive="active" class="waves-effect">
+                        <i class="fas fa-hands-helping"></i>
+                        <span>Fournisseur</span>
+                    </a>
+                </li>
+                <li *ngIf="role === 'admin'">
+                    <a [routerLink]="['/dashboard/admin/activities']" routerLinkActive="active" class="waves-effect">
+                        <i class="fas fa-bus-alt"></i>
+                        <span>Activities</span>
+                    </a>
+                </li>
+                <li *ngIf="role === 'admin'">
+                    <a [routerLink]="['/dashboard/admin/annonce']" routerLinkActive="active" class="waves-effect">
+                        <i class=" fas fa-bullhorn"></i>
+                        <span>Annonce Convention</span>
+                    </a>
+                </li>
+
+                <li *ngIf="role === 'admin'">
+                    <a [routerLink]="['/dashboard/admin/home']" routerLinkActive="active" class="waves-effect">
+                        <i class=" fas fa-tools"></i>
+                        <span>Ecran d'Accueil</span>
+                    </a>
+                </li>
+
+                <li *ngIf="role === 'adherent'">
+                    <a [routerLink]="['/dashboard/adherent/adherent']" routerLinkActive="active" class="waves-effect">
+                        <i class="ri-home-3-fill"></i>
+                        <span>Activities</span>
+                    </a>
+                </li>
+
+                <li class="dropdown" *ngIf="role === 'adherent'">
+                    <a href="javascript:void(0);" class="waves-effect" (click)="toggleDropdown('dropdown1')">
+                        <i class="fas fa-gifts"></i>
+                        <span>Convention</span>
+                        <i class="ri-arrow-right-s-line" [ngClass]="{'active': activeDropdown === 'dropdown1'}"></i>
+                    </a>
+                    <ul class="sub-menu" [ngClass]="{'active': activeDropdown === 'dropdown1'}">
+                        <li>
+                            <a [routerLink]="['/dashboard/adherent/mobileInternet']">Mobile et internet</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard/adherent/adsl']">ADSL</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard/adherent/engagementAchat']">Enguagement d'Achat</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard/adherent/bonAchat']">Bon d'Achat</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard/adherent/HotelBangalo']">Hotel et Bangalo</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard/adherent/sport']">Sport</a>
+                        </li>
+                        <!-- Add more Dropdown 1 items here -->
+                    </ul>
+                </li>
+                <li *ngIf="role === 'adherent'">
+                    <a [routerLink]="['/dashboard/adherent/historique']" routerLinkActive="active" class="waves-effect">
+                        <i class=" fas fa-history"></i>
+                        <span>Historique</span>
+                    </a>
+                </li>
+                <li *ngIf="role === 'adherent'">
+                    <a [routerLink]="['/dashboard/adherent/profile']" routerLinkActive="active" class="waves-effect">
+                        <i class="fas fa-user-tie"></i>
+                        <span>Profile</span>
+                    </a>
+                </li>
+
+                <li class="dropdown" *ngIf="role === 'adherent'">
+                    <a href="javascript:void(0);" class="waves-effect" (click)="toggleDropdown('dropdown2')">
+                        <i class="fas fa-users"></i>
+                        <span>Famille</span>
+                        <i class="ri-arrow-right-s-line" [ngClass]="{'active': activeDropdown === 'dropdown2'}"></i>
+                    </a>
+                    <ul class="sub-menu" [ngClass]="{'active': activeDropdown === 'dropdown2'}">
+                        <li>
+                            <a [routerLink]="['/dashboard/adherent/enfants']"><i
+                                    class="fab fa-reddit-alien"></i>Enfants</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard/adherent/parent']"><i class="fab fa-jenkins"></i>Parent</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard/adherent/conjont']">
+                                <i class="fas fa-heart"></i>Conjoint</a>
+                        </li>
+                        <!-- Add more Dropdown 1 items here -->
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+        <!-- Sidebar -->
+    </div>
+</div>

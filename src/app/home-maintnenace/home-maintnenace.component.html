@@ -1,0 +1,51 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Votre Conjoint</h4>
+
+                <form (ngSubmit)="addHomepageImage()">
+
+                    <div class="row mb-3 mt-4">
+                        <label class="col-sm-4 col-form-label">Titre 1</label>
+                        <div class="col-sm-6">
+                            <input class="form-control" name="h1" [(ngModel)]="h1" type="text"
+                                [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">Titre 2</label>
+                        <div class="col-sm-6">
+                            <input class="form-control" [(ngModel)]="h2" type="text"
+                                [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+
+
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">Description</label>
+                        <div class="col-sm-6">
+                            <input class="form-control" [(ngModel)]="p" type="text"
+                                [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">Image </label>
+                        <div class="col-sm-6">
+                          <input class="form-control" type="file" (change)="imageUpload($event)" name="image">
+                        </div>
+                      </div>
+
+                    <div class="form-group mb-3 text-center justify-content-center row mt-3 pt-1">
+                        <div class="col-6">
+                            <button class="btn btn-info w-25 waves-light  btn-rounded"
+                                type="submit">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

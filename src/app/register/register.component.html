@@ -1,0 +1,174 @@
+<div class="bg-overlay"></div>
+<div class="wrapper-page">
+  <div class="container-fluid p-0">
+    <div class="card cardd">
+      <div class="card-body">
+        <div class="text-center mt-4">
+          <div class="mb-3">
+            <a href="index.html" class="auth-logo">
+              <img src="assets/images/1.png" height="100" class="logo-dark mx-auto" alt="">
+              <img src="assets/images/1.png" height="100" class="logo-light mx-auto" alt="">
+            </a>
+          </div>
+        </div>
+
+        <h4 class="text-muted text-center font-size-18"><b>Inscrivez-Vous</b></h4>
+
+        <div class="p-3">
+          <app-notification></app-notification>
+
+          <!-- First Form -->
+          <form class="form-horizontal mt-3" (ngSubmit)="save()">
+            <div class="form-group  row mb-3">
+              <div class="col-md-6">
+                <!-- input-group -->
+              </div>
+            </div>
+
+            <!-- Second Form Fields -->
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label class="col-form-label">Nom</label>
+                  <input class="form-control" [(ngModel)]="name" [ngModelOptions]="{standalone: true}" type="text"
+                    placeholder="">
+                </div>
+                <!-- Add more fields for the second form as needed -->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label class="col-form-label">Prenom</label>
+                  <input class="form-control" [(ngModel)]="prenom" [ngModelOptions]="{standalone: true}" type="text"
+                    placeholder="">
+                </div>
+                <!-- Add more fields for the second form as needed -->
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label class="col-form-label">Matricule</label>
+                  <input class="form-control" type="text" placeholder="" [(ngModel)]="matricule"
+                    [ngModelOptions]="{standalone: true}" appInput>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label class="col-form-label">Numéro téléphone</label>
+                  <input class="form-control" [(ngModel)]="gsm" [ngModelOptions]="{standalone: true}" type="text"
+                    placeholder="" appInput>
+                </div>
+                <!-- Add more fields for the second form as needed -->
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label class="form-label mt-2">Date</label>
+                  <div class="input-group" id="datepicker2">
+                    <input type="text" class="form-control" placeholder="dd M, yyyy" data-date-format="dd M, yyyy"
+                      data-date-container='#datepicker2' data-provide="datepicker" data-date-autoclose="true"
+                      [(ngModel)]="date_naissance" name="date_naissance">
+                    <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label class="col-form-label">Etat Civil</label>
+                  <div class="col-sm-10">
+                    <select class="form-select" [(ngModel)]="etat_civil"
+                      [ngModelOptions]="{standalone: true}">
+                      <option [value]="'Célibataire'">Célibataire</option>
+                      <option [value]="'Marié'">Marié</option>
+                      <option [value]="'Divorcé'">Divorcé</option>
+                      <option [value]="'Veuve'">Veuve</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label class="col-form-label">Fonction</label>
+                  <div class="col-sm-10">
+                    <select class="form-select" [(ngModel)]="fonction"
+                      [ngModelOptions]="{standalone: true}">
+                      <option [value]="'Ouvrier'">Ouvrier</option> 
+                      <option [value]="'Receveur'">Receveur</option>
+                      <option [value]="'Chef gare'">Chef gare</option>
+                      <option [value]="'Chef district'">Chef district</option>
+                      <option [value]="'Adjoint'">Adjoint</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label class="col-form-label">Affectation</label>
+                  <div class="col-sm-10">
+                    <select class="form-select" [(ngModel)]="affectation"
+                      [ngModelOptions]="{standalone: true}">
+                      <option [value]="'A1'">A1</option>
+                      <option [value]="'A3'">A3</option>
+                      <option [value]="'A4'">A4</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>   
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+              
+                </div>
+                <!-- Add more fields for the second form as needed -->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label class="col-form-label">Adress</label>
+                  <input class="form-control" type="text" placeholder="" [(ngModel)]="adresse"
+                    [ngModelOptions]="{standalone: true}">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label class="col-form-label">cin</label>
+                  <input class="form-control" [(ngModel)]="cin" [ngModelOptions]="{standalone: true}"
+                    type="text" placeholder="" appInput>
+                </div>
+                <!-- Add more fields for the second form as needed -->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label class="col-form-label">cotaannuellesubvention</label>
+                  <input class="form-control" [(ngModel)]="cotaannuellesubvention" [ngModelOptions]="{standalone: true}"
+                    type="number" placeholder="">
+                </div>
+                <!-- Add more fields for the second form as needed -->
+              </div>
+            </div>
+
+            <!-- First Form Submit Button -->
+            <div class="form-group mb-3 text-center justify-content-center row mt-3 pt-1">
+              <div class="col-6">
+                <button class="btn btn-info w-100 waves-effect waves-light " type="submit">Inscription</button>
+              </div>
+            </div>
+          </form>
+          <!-- end First Form -->
+
+          <!-- Rest of your content -->
+        </div>
+        <!-- end -->
+      </div>
+      <!-- end cardbody -->
+    </div>
+    <!-- end card -->
+  </div>
+  <!-- end container -->
+</div>
+<!-- end -->

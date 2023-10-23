@@ -1,0 +1,130 @@
+<div class="row">
+  <div class="col-8">
+    <div class="card">
+      <div class="card-body">
+
+        <h4 class="card-title">Activites</h4>
+        <p class="card-title-desc">Nouvelle Activites</p>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Titre</th>
+              <th>Description</th>
+              <th>Type</th>
+              <th>Fournisseur</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let activity of activitesData">
+              <td>
+                <img [src]="activity.image_url" alt="{{ activity.titre }}" width="50">
+              </td>
+              <td>{{ activity.titre }}</td>
+              <td>{{ activity.description }}</td>
+              <td>{{ activity.type }}</td>
+              <td>{{ activity.fornisseur_name}}</td>
+              <td>
+                <a [routerLink]="'activities/' + activity.id"><i class="far fa-arrow-alt-circle-right"></i> </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="text-center mt-3">
+          <button class="btn btn-primary" [disabled]="currentPage === 1" (click)="previousPage()"><i
+              class=" fas fa-angle-double-left"></i></button>
+          <span class="mx-2">{{ currentPage }} / {{ lastPage }}</span>
+          <button class="btn btn-primary" [disabled]="currentPage === lastPage" (click)="nextPage()"> <i
+              class=" fas fa-angle-double-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Ajouter Une Activite</h4>
+        <form (ngSubmit)="addActiviteImage()">
+          <div class="row mb-3 mt-4">
+            <label class="col-sm-5 col-form-label">Titre</label>
+            <div class="col-sm-7">
+              <input class="form-control" [(ngModel)]="titre" type="text" [ngModelOptions]="{standalone: true}"
+                placeholder="titre d'activation" name="titre">
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label class="col-sm-5 col-form-label">Description</label>
+            <div class="col-sm-7">
+              <textarea class="form-control" [(ngModel)]="description" type="text" [ngModelOptions]="{standalone: true}"
+                placeholder="description pour l'activite" name="description"> </textarea>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label class="col-sm-5 col-form-label">finActivity</label>
+            <div class="col-sm-7">
+              <input class="form-control" [(ngModel)]="finActivity" type="date" [ngModelOptions]="{standalone: true}">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-5 col-form-label">subvention</label>
+            <div class="col-sm-7">
+              <input class="form-control" [(ngModel)]="subvention" type="number" [ngModelOptions]="{standalone: true}"
+                placeholder="subvention pour l'activite" name="subvention">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-5 col-form-label">nombreDePlace</label>
+            <div class="col-sm-7">
+              <input class="form-control" [(ngModel)]="nombreDePlace" type="number"
+                [ngModelOptions]="{standalone: true}" placeholder="nombreDePlace pour l'activite" name="nombreDePlace">
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label class="col-sm-5 col-form-label">prix</label>
+            <div class="col-sm-7">
+              <input class="form-control" [(ngModel)]="prix" type="number" [ngModelOptions]="{standalone: true}"
+                placeholder="" name="prix">
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label class="col-sm-5 col-form-label">Type</label>
+            <div class="col-sm-7">
+              <select class="form-select" [(ngModel)]="type" [ngModelOptions]="{standalone: true}">
+                <option [value]="'sociale'">Sociale</option>
+                <option [value]="'sportive'">Sportive</option>
+                <option [value]="'loisire'">Loisire</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label class="col-sm-5 col-form-label">Fournissuer</label>
+            <div class="col-sm-7">
+              <select class="form-select" [(ngModel)]="fournisseur_id" [ngModelOptions]="{standalone: true}">
+                <option *ngFor="let f of fournisseursData" [value]="f.id">{{f.nom}}</option>
+              </select>
+            </div>  
+          </div>
+
+          <div class="row mb-3">
+            <label class="col-sm-5 col-form-label">Image </label>
+            <div class="col-sm-7">
+              <input class="form-control" type="file" (change)="imageUpload($event)" name="image">
+            </div>
+          </div>
+
+          <div class="form-group mb-3 text-center justify-content-center row mt-3 pt-1">
+            <div>
+              <button class="btn btn-info w-25 waves-light btn-rounded" type="submit">Save</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

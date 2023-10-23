@@ -1,13 +1,137 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>Frondend</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/x-icon" href="">
+  <!-- App favicon -->
+  <link rel="shortcut icon" href="/assets/images/1.png">
+
+  <!-- Bootstrap Css -->
+  <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+  <!-- Icons Css -->
+  <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+  <!-- App Css-->
+  <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+
 </head>
+
 <body>
   <app-root></app-root>
+
+
+  <!-- JAVASCRIPT -->
+  <script src="assets/libs/jquery/jquery.min.js"></script>
+  <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/libs/metismenu/metisMenu.min.js"></script>
+  <script src="assets/libs/simplebar/simplebar.min.js"></script>
+  <script src="assets/libs/node-waves/waves.min.js"></script>
+
+  <script src="assets/libs/select2/js/select2.min.js"></script>
+  <script src="assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+  <script src="assets/libs/spectrum-colorpicker2/spectrum.min.js"></script>
+  <script src="assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+  <script src="assets/libs/admin-resources/bootstrap-filestyle/bootstrap-filestyle.min.js"></script>
+  <script src="assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+
+  <script src="assets/js/pages/form-advanced.init.js"></script>
+
+  <script src="assets/js/app.js"></script>
+
+
+  <script>
+    $(document).ready(function () {
+      // Function to toggle the menu
+      function toggleMenu() {
+        $('.links').toggleClass('active');
+        $('.overlay').toggleClass('active');
+      }
+
+      // Click event for the hamburger menu icon
+      $('.hamburger-menu').click(function () {
+        toggleMenu();
+      });
+
+      // Click event for the overlay (to close the menu when clicking outside)
+      $('.overlay').click(function () {
+        toggleMenu();
+      });
+    });
+
+
+    $(document).ready(function () {
+      // Use event delegation for dynamically added elements
+      $(document).on('click', '#addAdherentButton', function () {
+        $('#addAdherentModal').modal('show');
+      });
+    });
+
+    $(document).ready(function () {
+      // Use event delegation for dynamically added elements
+      $(document).on('click', '#editAdherentButton', function () {
+        $('#editAdherentModal').modal('show');
+      });
+    });
+
+    $(document).ready(function () {
+      // Use event delegation for dynamically added elements
+      $(document).on('click', '#editActiviteButton', function () {
+        $('#editActiviteModal').modal('show');
+      });
+    });
+
+    $(document).ready(function () {
+      // Use event delegation for dynamically added elements
+      $(document).on('click', '#editActiviteImageButton', function () {
+        $('#editActiviteImageModal').modal('show');
+      });
+    });
+
+    $(document).ready(function () {
+      // Use event delegation for dynamically added elements
+      $(document).on('click', '#editConventionButton', function () {
+        $('#editConventionModal').modal('show');
+      });
+    });
+
+    $(document).ready(function () {
+      // Use event delegation for dynamically added elements
+      $(document).on('click', '#editFournisseurButton', function () {
+        $('#editFournisseurModal').modal('show');
+      });
+    });
+
+    $(document).ready(function () {
+      // Use event delegation for dynamically added elements
+      $(document).on('click', '#activityDataButton', function () {
+        $('#activitesDataModal').modal('show');
+      });
+    });
+
+    $(document).ready(function () {
+      // Use event delegation for dynamically added elements
+      $(document).on('click', '#conventionDataButton', function () {
+        $('#conventionDataModal').modal('show');
+      });
+    });
+
+    $(document).ready(function () {
+      // Use event delegation for dynamically added elements
+      $(document).on('click', '#imageModalButton', function () {
+        $('#imageModal').modal('show');
+      });
+    });
+
+  </script>
+
+
 </body>
+
 </html>

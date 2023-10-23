@@ -1,0 +1,11 @@
+.sub-menu {
+    display: none;
+    /* or */
+    visibility: hidden;
+}
+
+.sub-menu.active {
+    display: block;
+    /* or */
+    visibility: visible;
+}

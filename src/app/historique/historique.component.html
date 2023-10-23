@@ -1,0 +1,75 @@
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Activties</h4>
+                <p class="card-title-desc">Liste de votre    activties</p>
+    
+                <div class="table-responsive">
+                    <table class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Title</th>
+                                <th>Prix</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-success" *ngFor="let reservation of activtiesReservations; let i = index">
+                                <th scope="row">{{ i + 1 }}</th>
+                                <td>{{ reservation.activites?.titre }}</td>
+                                <td>{{ reservation.activites?.prix }} DT</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+    
+                <!-- Pagination for activties -->
+                <div>
+                    <button *ngFor="let page of activtiesPagination.links"
+                        (click)="loadReservations('activties', page.label)">
+                        {{ page.label }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Conventions</h4>
+                <p class="card-title-desc"> Liste de votre conventions</p>
+    
+                <div class="table-responsive">
+                    <table class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Title</th>
+                                <th>Prix Mensuelle</th>
+                                <th>Periode de contrat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-info" *ngFor="let reservation of conventionsReservations; let i = index">
+                                <th scope="row">{{ i + 1 }}</th>
+                                <td>{{ reservation.conventions?.titre }}</td>
+                                <td>{{ reservation.conventions?.prix_mois }} DT</td>
+                                <td>{{ reservation.periode_convention }} mois</td>
+                              </tr>
+                        </tbody>
+                    </table>
+                </div>
+    
+                <!-- Pagination for conventions -->
+                <div>
+                    <button *ngFor="let page of conventionsPagination.links"
+                        (click)="loadReservations('conventions', page.label)">
+                        {{ page.label }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

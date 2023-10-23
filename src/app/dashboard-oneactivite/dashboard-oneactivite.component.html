@@ -1,0 +1,250 @@
+<div class="row">
+    <div class="col-xl-8">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-4">Activites: {{ activity?.titre}}
+                </h4>
+                <div class="table-responsive">
+                    <table class="table table-centered mb-0 align-middle table-hover table-nowrap">
+                        <thead class="table-light">
+                            <tr>
+                                <th>titre</th>
+                                <th>type</th>
+                                <th>fornisseur d'activité</th>
+                                <th>date limite</th>
+                                <th>date de creation</th>
+                            </tr>
+                        </thead><!-- end thead -->
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <h6 class="mb-0">{{ activity?.titre}}</h6>
+                                </td>
+                                <td>{{activity?.type}}</td>
+                                <td>{{activity?.fornisseur?.nom}}</td> <!-- Display fournisseur's name -->
+                                <td>{{activity?.finActivity}}</td> <!-- Display fournisseur's name -->
+                                <td>{{activity?.created_at_formatted}}</td>
+                            </tr>
+                            <!-- end -->
+                        </tbody><!-- end tbody -->
+                    </table> <!-- end table -->
+                </div>
+            </div><!-- end card -->
+        </div><!-- end card -->
+    </div>
+    <!-- end col -->
+    <div class="col-xl-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-4">Statistique D'activation</h4>
+
+                <div class="row">
+                    <div class="col-3">
+                        <div class="text-center mt-4">
+                            <h5>{{activity?.nombreDePlace}}</h5>
+                            <p class="mb-2 text-truncate">Nbr De Place</p>
+                        </div>
+                    </div>
+                    <!-- end col -->
+                    <div class="col-3">
+                        <div class="text-center mt-4">
+                            <h5>{{activity?.prix}} </h5>
+                            <p class="mb-2 text-truncate">PRIX</p>
+                        </div>
+                    </div>
+                    <!-- end col -->
+                    <div class="col-3">
+                        <div class="text-center mt-4">
+                            <h5>{{activity?.placesDisponibles}}</h5>
+                            <p class="mb-2 text-truncate">Place Disponible </p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="text-center mt-4">
+                            <h5>{{activity?.subvention}} %</h5>
+                            <p class="mb-2 text-truncate">Subvention</p>
+                        </div>
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+            </div>
+        </div><!-- end card -->
+    </div><!-- end col -->
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="row no-gutters align-items-center">
+                <div class="col-md-4">
+                    <img class="card-img img-fluid" [src]="activity?.image_url" alt="Card image">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{activity?.titre}}</h5>
+                        <p class="card-text">{{activity?.description}}</p>
+                        <p class="card-text"><small class="text-muted">Dernière mise à jours
+                                {{activity?.time_difference}}</small>
+                        </p>
+                        <div class=" mt-5">
+                            <a id="editActiviteImageButton" class="btn btn-success"><i
+                                    class=" fas fa-file-import"></i> change l'image d'activité</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-4">Action</h4>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="text-center mt-4">
+                            <a id="editActiviteButton" class="btn btn-primary"><i class="fas fa-pencil-alt"></i>
+                            Modifier l'activité
+                            </a>
+                        </div>
+                    </div>
+                    <!-- end col -->
+                    <div class="col-6">
+                        <div class="text-center mt-4">
+                            <a class="btn btn-danger" (click)="deleteActivty(activity?.id)">
+                                <i class="fas fa-trash-alt"></i>Supprimer l'activité</a>
+                        </div>
+                    </div>
+                    <!-- end col -->
+                    <div class="col-4">
+
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+            </div>
+        </div><!-- end card -->
+    </div><!-- end col -->
+
+</div>
+
+
+<!-- Edit Modal Template -->
+<div class="modal fade" id="editActiviteModal" tabindex="-1" aria-labelledby="editActiviteModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editActiviteModal">Modifier Activite</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal mt-3" (ngSubmit)="updateActivty()">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="titre" class="form-label">Titre</label>
+                                <input type="text" [(ngModel)]="activity.titre" [ngModelOptions]="{ standalone: true }"
+                                    name="titre" class="form-control" id="titre">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="prenom" class="form-label">Description</label>
+                                <textarea type="text" [(ngModel)]="activity.description"
+                                    [ngModelOptions]="{ standalone: true }" name="description" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="fournisseur" class="form-label">Fournisseur</label>
+                                <select class="form-select" [(ngModel)]="activity.fornisseurs_id"
+                                [ngModelOptions]="{ standalone: true }">
+                                <option *ngFor="let f of fournisseursData" [value]="f.id">{{ f.nom }}</option>
+                              </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="cin" class="form-label">Subvention</label>
+                                <input type="number" name="Subvention" [(ngModel)]="activity.subvention"
+                                    [ngModelOptions]="{ standalone: true }" class="form-control">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="finActivity" class="form-label">Fin D'Activité</label>
+                                <input type="date" [(ngModel)]="activity.finActivity"
+                                    [ngModelOptions]="{ standalone: true }" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="etatCivil" class="form-label">Type</label>
+                                <select class="form-select" id="etatCivil" name="type" [(ngModel)]="activity.type"
+                                    [ngModelOptions]="{ standalone: true }">
+                                    <option value="loisire">loisire</option>
+                                    <option value="sportive">sportive</option>
+                                    <option value="sociale">sociale</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="nombreDePlace" class="form-label">Nombre De Place</label>
+                                <input type="text" class="form-control" [(ngModel)]="activity.nombreDePlace"
+                                    [ngModelOptions]="{ standalone: true }" name="nombreDePlace" id="nombreDePlace"
+                                    placeholder="NombreDePlace">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="prix" class="form-label">Prix</label>
+                                <input type="text" class="form-control" [(ngModel)]="activity.prix"
+                                    [ngModelOptions]="{ standalone: true }" name="prix" id="prix" placeholder="Prix">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Edit Image Modal Template -->
+
+<div class="modal fade" id="editActiviteImageModal" tabindex="-1" aria-labelledby="editActiviteImageModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editActiviteImageModal">Modifier Activite</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal mt-3" (ngSubmit)="onFormSubmit($event)">
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Pohto D'activite</label>
+                        <input class="form-control"  type="file" (change)="onImageSelected($event)">
+                    </div>
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

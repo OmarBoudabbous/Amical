@@ -1,0 +1,94 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0">Demande Inscription Mobile Internet</h4>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="float-end">
+                </div>
+                <!-- Afficher le formulaire d'ajout si "ajouter" est sélectionné  *ngIf="actionSelectionnee === 'ajouter'" -->
+                <div>
+                    <form (ngSubmit)="addDemande()">
+                        <div class="row mb-3">
+                            <label class="col-sm-4 col-form-label">CHOIX DU FORFAIT</label>
+                            <div class="col-sm-8">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="choixforfait" value="voix"
+                                        [(ngModel)]="choixforfait">
+                                    <label class="form-check-label">Voix</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="choixforfait" value="internet"
+                                        [(ngModel)]="choixforfait">
+                                    <label class="form-check-label">Internet</label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Dropdown list for Voix -->
+                        <div *ngIf="choixforfait === 'voix'" class="row mb-3">
+                            <label class="col-sm-4 col-form-label">Forfait Voix</label>
+                            <div class="col-sm-8">
+                                <select class="form-select" (change)="updateFormData($event)">
+                                    <option [value]=""></option>
+                                    <option [value]="'20-22.80'">20</option>
+                                    <option [value]="'30-34.20'">30 </option>
+                                    <option [value]="'40-45.60'">40 </option>
+                                    <option [value]="'40-57'">50</option>
+                                    <option [value]="'40-68.4'">60</option>
+                                    <option [value]="'40-79.8'">70</option>
+                                    <option [value]="'40-91.2'">80</option>
+                                    <option [value]="'40-102.6'">90</option>
+                                    <option [value]="'40-114'">100</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Dropdown list for Internet -->
+                        <div *ngIf="choixforfait === 'internet'" class="row mb-3">
+                            <label class="col-sm-4 col-form-label">Forfait Internet</label>
+                            <div class="col-sm-8">
+                                <select class="form-select" (change)="updateFormData($event)">
+                                    <option [value]=""></option>
+                                    <option [value]="'Sim Data 25G-10'">Sim Data 25G </option>
+                                    <option [value]="'4G Box 35G-23'">4G Box 35G </option>
+                                    <option [value]="'4G Box 70G-35'">4G Box 70G </option>
+                                    <option [value]="'4G Box 100G-49'">4G Box 100G </option>
+                                    <option [value]="'MIFI 35G-23'">MIFI 35G </option>
+                                    <option [value]="'MIFI 70G-35'">MIFI 70G </option>
+                                    <option [value]="'MIFI 100G-49'">MIFI 100G</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3" *ngIf="formData.selected_value">
+                            <label class="col-sm-4 col-form-label">Prix</label>
+                            <div class="col-sm-4">
+                                {{ formData.prix }} DT
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3 text-center justify-content-center row mt-3 pt-1">
+                            <div class="col-12">
+                                <button class="btn btn-info w-25 waves-light btn-rounded" type="submit">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div><!-- end card -->
+    </div><!-- end col -->
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-body text-center">
+                <div>
+                    <img [src]="annonceById.image_url" alt="" class="styled-image">
+                </div>
+            </div>
+        </div><!-- end card -->
+    </div>
+
+</div>

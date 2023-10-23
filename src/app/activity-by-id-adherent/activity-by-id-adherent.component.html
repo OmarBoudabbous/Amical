@@ -1,0 +1,130 @@
+<div class="row">
+    <div class="col-xl-8">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-4">Activites: {{ activity?.titre}}
+                </h4>
+                <div class="table-responsive">
+                    <table class="table table-centered mb-0 align-middle table-hover table-nowrap">
+                        <thead class="table-light">
+                            <tr>
+                                <th>titre</th>
+                                <th>type</th>
+                                <th>date limite</th>
+                                <th>date de creation</th>
+                            </tr>
+                        </thead><!-- end thead -->
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <h6 class="mb-0">{{ activity?.titre}}</h6>
+                                </td>
+                                <td>{{activity?.type}}</td>
+                                <td>{{activity?.finActivity}}</td> <!-- Display fournisseur's name -->
+                                <td>{{activity?.created_at_formatted}}</td>
+                            </tr>
+                            <!-- end -->
+                        </tbody><!-- end tbody -->
+                    </table> <!-- end table -->
+                </div>
+            </div><!-- end card -->
+        </div><!-- end card -->
+    </div>
+    <!-- end col -->
+    <div class="col-xl-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-4">Statistique D'activation</h4>
+
+                <div class="row">
+                    <div class="col-3">
+                        <div class="text-center mt-4">
+                            <h5>{{activity?.nombreDePlace}}</h5>
+                            <p class="mb-2 text-truncate">Nbr De Place</p>
+                        </div>
+                    </div>
+                    <!-- end col -->
+                    <div class="col-3">
+                        <div class="text-center mt-4">
+                            <h5>{{activity?.prix}} </h5>
+                            <p class="mb-2 text-truncate">PRIX</p>
+                        </div>
+                    </div>
+                    <!-- end col -->
+                    <div class="col-3">
+                        <div class="text-center mt-4">
+                            <h5>{{activity?.placesDisponibles}}</h5>
+                            <p class="mb-2 text-truncate">Place Disponible </p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="text-center mt-4">
+                            <h5>{{activity?.subvention}} %</h5>
+                            <p class="mb-2 text-truncate">Subvention</p>
+                        </div>
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+            </div>
+        </div><!-- end card -->
+    </div><!-- end col -->
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="row no-gutters align-items-center">
+                <div class="col-md-4">
+                    <a id="imageModalButton">
+                        <img class="card-img img-fluid" [src]="activity?.image_url" alt="Card image">
+                    </a>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{activity?.titre}}</h5>
+                        <p class="card-text">{{activity?.description}}</p>
+
+                        <div class="form-group">
+                            <label>Sélectionner les enfants :</label>
+                            <div class="form-check" *ngFor="let enfant of enfants">
+                                <input type="checkbox" class="form-check-input" [id]="'enfant_' + enfant.id" [(ngModel)]="selectedEnfants[enfant.id]" [value]="enfant.id">
+                                <label class="form-check-label" [for]="'enfant_' + enfant.id">{{enfant.nom}}</label>
+                            </div>
+                        </div>                        
+                        
+                        <div class="mt-4">
+                            <label>Sélectionner Conjoint :</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="conjoint" [(ngModel)]="conjointId">
+                            <label class="form-check-label" for="conjoint">{{conjointData.nom}}</label>
+                        </div>
+
+                        <div class=" mt-5">
+                            <a id="" class="btn btn-success" (click)="makeReservation(activity?.id)"><i
+                                    class=" fas fa-file-import"></i> Reserver cette activité</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg custom-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img class="card-img img-fluid" [src]="activity?.image_url" alt="Card image">
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

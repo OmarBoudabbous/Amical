@@ -1,0 +1,85 @@
+<div class="row justify-content-center">
+  <div class="col-xl-6">
+    <div class="card carousel-container">
+      <div class="card-body">
+
+        <h4 class="card-title">Activites</h4>
+        <p class="card-title-desc">Nouvelle Activites</p>
+
+        <div id="carouselActivites" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner" role="listbox">
+            <div class="carousel-item" *ngFor="let activity of activitesData; let i = index"
+              [ngClass]="{ 'active': i === currentActivityIndex }">
+              <img [src]="activity.image_url" alt="..." class="d-block img-fluid standard-image "
+                alt="{{ activity.titre }}" (click)="fetchActivityById(activity.id)">
+              <div class="carousel-caption d-none d-md-block text-white-50">
+              </div>
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#carouselActivites" role="button" data-bs-slide="prev"
+            (click)="setActiveCarouselItem(currentActivityIndex - 1)">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselActivites" role="button" data-bs-slide="next"
+            (click)="setActiveCarouselItem(currentActivityIndex + 1)">
+            <span class="carousel-control-next-icon " aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+      <div class="text-center mb-2">
+        <button class="btn btn-info" id="activityDataButton"> voir plus Activites</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+<!-- Activite Modal Template -->
+<div class="modal fade" id="activitesDataModal" tabindex="-1" aria-labelledby="activitesDataLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="activitesDataLabel">List Activites</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Titre</th>
+              <th>Description</th>
+              <th>Prix</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let activity of activitesData">
+              <td (click)="fetchActivityById(activity.id)" data-bs-dismiss="modal">
+                <img [src]="activity.image_url" alt="{{ activity.titre }}" width="50">
+              </td>
+              <td (click)="fetchActivityById(activity.id)" data-bs-dismiss="modal">{{ activity.titre }}</td>
+              <td (click)="fetchActivityById(activity.id)" data-bs-dismiss="modal">{{ activity.description }}</td>
+              <td (click)="fetchActivityById(activity.id)" data-bs-dismiss="modal">{{ activity.prix }} TND</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="text-center mt-3">
+          <button class="btn btn-primary" [disabled]="currentPage === 1" (click)="previousPage()"><i
+              class=" fas fa-angle-double-left"></i></button>
+          <span class="mx-2">{{ currentPage }} / {{ lastPage }}</span>
+          <button class="btn btn-primary" [disabled]="currentPage === lastPage" (click)="nextPage()"> <i
+              class=" fas fa-angle-double-right"></i></button>
+        </div>
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

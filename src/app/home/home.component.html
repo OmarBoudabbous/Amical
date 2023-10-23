@@ -1,0 +1,76 @@
+<div class="big-wrapper light" [class.light]="!isDarkMode" [class.dark]="isDarkMode">
+  <img src="/assets/img/shape.png" alt="" class="shape" />
+
+  <header>
+    <div class="container">
+      <div class="logo">
+        <img src="/assets/images/1.png" alt="Logo" />
+        <h3>Amical Tunisie Auto</h3>
+      </div>
+
+      <div class="links">
+        <ul>
+          <li class="nav-item active">
+            <a class="nav-link" [routerLink]="'/'">Home</a>
+          </li>
+          <li class="nav-item" *ngIf="isAuthenticated() && role === 'admin'">
+            <a class="nav-link" [routerLink]="'dashboard/admin/index'">Dashboard</a>
+          </li>
+          <li class="nav-item" *ngIf="isAuthenticated() && role === 'adherent'">
+            <a class="nav-link" [routerLink]="'dashboard/adherent/adherent'">Dashboard
+              Adherent</a>
+          </li>
+          <li *ngIf="!isAuthenticated()" [routerLink]="'login'">
+            <a class="btn">Connecter</a>
+          </li>
+          <li *ngIf="isAuthenticated()">
+            <a (click)="logout()" class="btn">Déconnexion</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="overlay"></div>
+
+      <div class="hamburger-menu">
+        <div class="bar"></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="showcase-area">
+    <div class="container">
+      <div class="left">
+        <div class="big-title">
+          <h1>{{ homeData?.h1 }}</h1>
+          <h1>{{homeData?.h2}}</h1>
+        </div>
+        <p class="text">
+          {{homeData?.p}}
+        </p>
+        <div class="cta">
+          <ng-container *ngIf="!isAuthenticated()" [routerLink]="'login'">
+            <a class="btn">Connecter</a>
+          </ng-container>
+          <div *ngIf="!isAuthenticated()" [routerLink]="'login'">
+            <a class="btn">Connecter</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <img [src]="homeData?.image_url" alt="amical" class="person" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-area">
+    <div class="container">
+      <button class="toggle-btn" (click)="toggleDarkMode()">
+        <i class="far fa-moon"></i>
+        <i class="far fa-sun"></i>
+      </button>
+    </div>
+  </div>
+</div>

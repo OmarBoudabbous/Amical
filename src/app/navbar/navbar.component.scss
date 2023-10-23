@@ -1,0 +1,56 @@
+.landing-page {
+  background-image: url('/assets/images/landing-page-design.png');
+  /* Replace with the actual path to your background image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  /* Set the height to 100% of the viewport height */
+}
+
+.navbar-brand-container {
+  flex-grow: 1;
+  /* Allow the brand to grow and push menu items to the right */
+}
+
+.navbar-nav {
+  margin-left: auto;
+  /* Push the menu items to the right */
+}
+
+.navbar-nav .nav-link:hover {
+  color: orange;
+  /* Change link color to orange on hover */
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  /* Adjust as needed */
+  align-items: center;
+  /* Other styles for .content */
+}
+
+.left-content {
+  flex: 1;
+  text-align: center;
+  /* Center text horizontally */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* Center text vertically */
+  height: 100%;
+  /* Ensure .left-content takes full height of .landing-page */
+}
+
+.left-content h1 {
+  margin: 0;
+  /* Remove default margin for <h1> element */
+  background-color: orange;
+  /* Set background color */
+  color: white;
+  /* Set text color */
+  padding: 20px;
+  /* Add padding to create the banner effect */
+}
+

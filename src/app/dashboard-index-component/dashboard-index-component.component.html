@@ -1,0 +1,332 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Liste Adherents</h4>
+                <p class="card-title-desc"></p>
+                <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6">
+                            <button class="btn btn-success" id="addAdherentButton">Ajouter Adherent</button>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <div id="datatable-buttons_filter" class="dataTables_filter">
+                                <label>Search:
+                                    <input type="search" class="form-control form-control-sm" placeholder=""
+                                        aria-controls="datatable-buttons">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="table-responsive">
+                                <table id="datatable-buttons"
+                                    class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline"
+                                    role="grid" aria-describedby="datatable-buttons_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th>Photo</th>
+                                            <th>Matricule</th>
+                                            <th>Nom</th>
+                                            <th>Prenom</th>
+                                            <th>CIN</th>
+                                            <th>GSM</th>
+                                            <th>Affectation</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Loop through your users as before -->
+                                        <tr *ngFor="let user of users"
+                                            [ngClass]="{'hover-effect': isHovered(user.id)}"
+                                            (mouseenter)="onMouseEnter(user.id)" (mouseleave)="onMouseLeave(user.id)"
+                                            >
+                                            <td (click)="viewUserDetails(user.id)" >
+                                                <div  class="center-photo">
+                                                    <img [src]="user.image" alt="" width="50">
+                                                </div>
+                                            </td>
+                                            <td (click)="viewUserDetails(user.id)">{{ user.matricule }}</td>
+                                            <td (click)="viewUserDetails(user.id)">{{ user.name }}</td>
+                                            <td (click)="viewUserDetails(user.id)">{{ user.prenom }}</td>
+                                            <td (click)="viewUserDetails(user.id)">{{ user.cin }}</td>
+                                            <td (click)="viewUserDetails(user.id)">{{ user.gsm }}</td>
+                                            <td (click)="viewUserDetails(user.id)">{{ user.affectation }}</td>
+                                            <td>
+                                                <a id="editAdherentButton" (click)="viewUser(user.id)"
+                                                    class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
+                                                <a (click)="deleteUser(user.id)" class="btn btn-danger"><i
+                                                        class="fas fa-trash-alt"></i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <!-- Pagination Controls -->
+                            <nav *ngIf="totalPages > 1">
+                                <ul class="pagination">
+                                    <li class="page-item" *ngFor="let page of getPaginationArray()">
+                                        <a class="page-link" [routerLink]="['.']" [queryParams]="{ page: page }">{{ page
+                                            }}</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- add Modal Template -->
+<div class="modal fade" id="addAdherentModal" tabindex="-1" aria-labelledby="addAdherentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addAdherentModalLabel">Ajouter Adherent</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="createUser()" class="form-horizontal mt-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="nom" class="form-label">Nom</label>
+                                <input type="text" [(ngModel)]="name" name="name" class="form-control" id="nom"
+                                    placeholder="Nom">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="prenom" class="form-label">Prenom</label>
+                                <input type="text" [(ngModel)]="prenom" name="prenom" class="form-control" id="prenom"
+                                    placeholder="Prenom">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="matricule" class="form-label">Matricule</label>
+                                <input type="text" [(ngModel)]="matricule" name="matricule" class="form-control"
+                                    id="matricule" placeholder="Matricule" appInput>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="cin" class="form-label">CIN</label>
+                                <input type="text" [(ngModel)]="cin" name="cin" class="form-control" id="cin"
+                                    placeholder="CIN" appInput>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="dateNaissance" class="form-label">Date</label>
+                                <input type="date" class="form-control" id="dateNaissance"
+                                    placeholder="Date de Naissance" [(ngModel)]="date_naissance" name="date_naissance">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="etatCivil" class="form-label">Etat Civil</label>
+                                <select class="form-select" id="etatCivil" [(ngModel)]="etat_civil" name="etat_civil">
+                                    <option value="Célibataire">Célibataire</option>
+                                    <option value="Marié">Marié</option>
+                                    <option value="Divorcé">Divorcé</option>
+                                    <option value="Veuve">Veuve</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="fonction" class="form-label">Fonction</label>
+                                <select class="form-select" id="fonction" [(ngModel)]="fonction" name="fonction">
+                                    <option value="Ouvrier">Ouvrier</option>
+                                    <option value="Receveur">Receveur</option>
+                                    <option value="Chef gare">Chef gare</option>
+                                    <option value="Chef district">Chef district</option>
+                                    <option value="Adjoint">Adjoint</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="affectation" class="form-label">Affectation</label>
+                                <select class="form-select" id="affectation" [(ngModel)]="affectation"
+                                    name="affectation">
+                                    <option value="A1">A1</option>
+                                    <option value="A3">A3</option>
+                                    <option value="A4">A4</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="adresse" class="form-label">Adresse</label>
+                                <input type="text" class="form-control" [(ngModel)]="adresse" name="adresse"
+                                    id="adresse" placeholder="Adresse">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="telephone" class="form-label">téléphone</label>
+                                <input type="text" [(ngModel)]="gsm" name="gsm" class="form-control" id="telephone"
+                                    placeholder="Numéro téléphone">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cotaAnnuelle" class="form-label">Cotisation Annuelle Subvention</label>
+                        <input type="number" [(ngModel)]="cotaannuellesubvention" name="cotaannuellesubvention"
+                            class="form-control" id="cotaAnnuelle" placeholder="Cotisation Annuelle Subvention">
+                    </div>
+
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Edit Modal Template -->
+<div class="modal fade" id="editAdherentModal" tabindex="-1" aria-labelledby="editAdherentModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editAdherentModalLabel">Modifier Adherent</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="updateUser()" class="form-horizontal mt-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="nom" class="form-label">Nom</label>
+                                <input type="text" [(ngModel)]="user.name" name="name" class="form-control" id="nom"
+                                    placeholder="Nom">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="prenom" class="form-label">Prenom</label>
+                                <input type="text" [(ngModel)]="user.prenom" name="prenom" class="form-control"
+                                    id="prenom" placeholder="Prenom">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="matricule" class="form-label">Matricule</label>
+                                <input type="text" [(ngModel)]="user.matricule" name="matricule" class="form-control"
+                                    id="matricule" placeholder="Matricule" appInput>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="cin" class="form-label">CIN</label>
+                                <input type="text" [(ngModel)]="user.cin" name="cin" class="form-control" id="cin"
+                                    placeholder="CIN" appInput>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="dateNaissance" class="form-label">Date</label>
+                                <input type="date" class="form-control" id="dateNaissance"
+                                    placeholder="Date de Naissance" [(ngModel)]="user.date_naissance"
+                                    name="date_naissance">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="etatCivil" class="form-label">Etat Civil</label>
+                                <select class="form-select" id="etatCivil" [(ngModel)]="user.etat_civil"
+                                    name="etat_civil">
+                                    <option value="Célibataire">Célibataire</option>
+                                    <option value="Marié">Marié</option>
+                                    <option value="Divorcé">Divorcé</option>
+                                    <option value="Veuve">Veuve</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="fonction" class="form-label">Fonction</label>
+                                <select class="form-select" id="fonction" [(ngModel)]="user.fonction" name="fonction">
+                                    <option value="Ouvrier">Ouvrier</option>
+                                    <option value="Receveur">Receveur</option>
+                                    <option value="Chef gare">Chef gare</option>
+                                    <option value="Chef district">Chef district</option>
+                                    <option value="Adjoint">Adjoint</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="affectation" class="form-label">Affectation</label>
+                                <select class="form-select" id="affectation" [(ngModel)]="user.affectation"
+                                    name="affectation">
+                                    <option value="A1">A1</option>
+                                    <option value="A3">A3</option>
+                                    <option value="A4">A4</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="adresse" class="form-label">Adresse</label>
+                                <input type="text" class="form-control" [(ngModel)]="user.adresse" name="adresse"
+                                    id="adresse" placeholder="Adresse">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="telephone" class="form-label">téléphone</label>
+                                <input type="text" [(ngModel)]="user.gsm" name="gsm" class="form-control" id="telephone"
+                                    placeholder="Numéro téléphone">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cotaAnnuelle" class="form-label">Cotisation Annuelle Subvention</label>
+                        <input type="number" [(ngModel)]="user.cotaannuellesubvention" name="cotaannuellesubvention"
+                            class="form-control" id="cotaAnnuelle" placeholder="Cotisation Annuelle Subvention">
+                    </div>
+
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
